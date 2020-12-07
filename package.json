@@ -1,0 +1,22 @@
+{
+	"name": "json-rpc-async",
+	"version": "1.0.0",
+	"main": "src/index.js",
+	"scripts": {
+		"test": "nodemon test/test-server.js"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"@chriscdn/async-for-each": "https://github.com/chriscdn/async-for-each",
+		"axios": "^0.21.0",
+		"is-function": "^1.0.2",
+		"isobject": "^4.0.0",
+		"uuid": "^8.3.1"
+	},
+	"peerDependencies": {
+		"express": "4.x"
+	},
+	"devDependencies": {
+		"express": "^4.17.1"
+	}
+}
