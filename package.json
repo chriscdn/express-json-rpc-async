@@ -1,5 +1,5 @@
 {
-	"name": "json-rpc-async",
+	"name": "@chriscdn/express-json-rpc-async",
 	"version": "1.0.0",
 	"main": "src/index.js",
 	"scripts": {
