@@ -1,9 +1,9 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 
-const {
-	middleware
-} = require('../src/index')
+const 
+	rpcMiddleware
+ = require('../middleware')
 
 const app = express()
 
@@ -13,6 +13,9 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json())
 
-app.post('/rpc', middleware(require('./methods')))
+
+
+// app.post('/rpc/auth', rpcMiddleware(require('./auth-methods')))
+app.post('/rpc', rpcMiddleware(require('./methods')))
 
 app.listen(5000)

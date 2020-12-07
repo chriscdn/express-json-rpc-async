@@ -5,7 +5,7 @@ const isFunction = require('is-function')
 const {
 	CustomError,
 	ErrorCodes
-} = require('./custom-error')
+} = require('../error')
 
 function successObject(id, result) {
 	return {
@@ -18,6 +18,15 @@ function successObject(id, result) {
 }
 
 function errorObject(id, err) {
+
+	if (err instanceof CustomError ) {
+		// all good
+	} else {
+		const message = err.message
+		err = new CustomError(ErrorCodes.INTERNALERROR)
+		err.data = {internal:message}
+	}
+
 	return {
 		jsonrpc: "2.0",
 		error: {
@@ -52,10 +61,10 @@ const processRequest = async (req, res, methods, body) => {
 		try {
 			return successObject(id, await method.call(methods, params, req, res))
 		} catch (err) {
-			return errorObject(id, ErrorCodes.METHODNOTFOUND)
+			return errorObject(id, err)
 		}
 	} else {
-		return errorObject(id, new CustomError("Method not found", id, -32601))
+		return errorObject(id, ErrorCodes.METHODNOTFOUND)
 	}
 
 }

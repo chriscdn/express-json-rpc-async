@@ -1,7 +1,14 @@
-const middleware = require('./middleware')
-const Client = require('./client')
+const rpcMiddleware = require('../middleware')
+const rpcClient = require('../client')
+
+const {
+	CustomError: rpcError,
+	ErrorCodes: rpcErrorCodes
+} = require('../error')
 
 module.exports = {
-	middleware,
-	Client
+	rpcMiddleware,
+	rpcClient,
+	rpcError,
+	rpcErrorCodes
 }

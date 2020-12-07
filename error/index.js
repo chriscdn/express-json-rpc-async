@@ -1,3 +1,5 @@
+const isobject = require('isobject')
+
 const ErrorCodes = {
 	PARSEERROR: {
 		code: -32700,
@@ -21,11 +23,20 @@ const ErrorCodes = {
 	}
 }
 
+// -32000 to -32099 is reserved!
+
 class CustomError extends Error {
 	constructor(message = ErrorCodes.INTERNALERROR.message, data = null, code = ErrorCodes.INTERNALERROR.code) {
-		super(message)
-		this.code = code
-		this.data = data
+
+		if (isobject(message)) {
+			super(message.message)
+			this.code = message.code
+			this.data = message.data
+		} else {
+			super(message)
+			this.code = code
+			this.data = data
+		}
 	}
 }
 

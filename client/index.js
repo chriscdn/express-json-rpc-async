@@ -5,8 +5,9 @@ const {
 } = require('uuid')
 
 const {
-	CustomError
-} = require('./custom-error')
+	CustomError,
+	ErrorCodes
+} = require('../error')
 
 class Client {
 
@@ -28,11 +29,13 @@ class Client {
 	}
 
 	handleResponse(data) {
-		if (data.result) {
+		if (data.hasOwnProperty('result')) {
 			return data.result
-		} else if (data.error) {
+		} else if (data.hasOwnProperty('error')) {
 			const err = data.error
 			throw new CustomError(err.message, err.data, err.code)
+		} else {
+			throw new Error('The server did not respond correctly.')
 		}
 	}
 
@@ -57,6 +60,7 @@ class Client {
 		const queue = this._batchQueue
 		this.resetQueue()
 		const response = await this.axios.post('', queue)
+
 		return response.data.map(item => this.handleResponse(item))
 	}
 
