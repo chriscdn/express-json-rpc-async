@@ -1,4 +1,4 @@
-const middleware = require('./express-middleware')
+const middleware = require('./middleware')
 const Client = require('./client')
 
 module.exports = {
