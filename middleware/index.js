@@ -64,7 +64,9 @@ const processRequest = async (req, res, methods, body) => {
 			return errorObject(id, err)
 		}
 	} else {
+
 		return errorObject(id, ErrorCodes.METHODNOTFOUND)
+
 	}
 
 }
@@ -73,7 +75,7 @@ module.exports = methods => {
 
 	return async (req, res) => {
 
-		const body = req.body || {}
+		const body = req.body
 
 		if (Array.isArray(body)) {
 
