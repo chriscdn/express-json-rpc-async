@@ -1,4 +1,4 @@
-const isobject = require('isobject')
+const isObject = require('../src/is-object')
 
 const ErrorCodes = {
 	PARSEERROR: {
@@ -28,7 +28,7 @@ const ErrorCodes = {
 class CustomError extends Error {
 	constructor(message = ErrorCodes.INTERNALERROR.message, data = null, code = ErrorCodes.INTERNALERROR.code) {
 
-		if (isobject(message)) {
+		if (isObject(message)) {
 			super(message.message)
 			this.code = message.code
 			this.data = message.data

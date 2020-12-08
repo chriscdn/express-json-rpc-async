@@ -1,5 +1,5 @@
 const asyncForEach = require('@chriscdn/async-for-each')
-const isObject = require('isobject')
+const isObject = require('../src/is-object')
 const isFunction = require('is-function')
 
 const {
@@ -61,6 +61,8 @@ const processRequest = async (req, res, methods, body) => {
 		try {
 			return successObject(id, await method.call(methods, params, req, res))
 		} catch (err) {
+			// keep this console.log for sanity sake
+			console.log(err)
 			return errorObject(id, err)
 		}
 	} else {
