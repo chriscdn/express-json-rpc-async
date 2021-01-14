@@ -11,10 +11,8 @@ const {
 
 class Client {
 
-	constructor(baseURL) {
-		this.axios = axios.create({
-			baseURL
-		})
+	constructor(config = {}) {
+		this.axios = axios.create(config)
 
 		this.resetQueue()
 	}
