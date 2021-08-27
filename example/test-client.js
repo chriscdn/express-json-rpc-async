@@ -1,6 +1,8 @@
 const Client = require('../client')
 const get = require('lodash.get')
-const client = new Client('http://localhost:5000/rpc')
+const client = new Client({
+	baseURL: 'http://localhost:5000/rpc'
+})
 
 client.axios.interceptors.response.use(response => response, error => {
 	if (get(error, 'response.status') === 401) {
